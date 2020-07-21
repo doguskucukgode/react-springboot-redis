@@ -56,5 +56,4 @@ public class UserResource {
         userService.delete(userId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
 }
