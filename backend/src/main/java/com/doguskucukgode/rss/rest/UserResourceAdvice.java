@@ -1,4 +1,4 @@
-package com.doguskucukgode.rsm.rest;
+package com.doguskucukgode.rss.rest;
 
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.core.MediaType;

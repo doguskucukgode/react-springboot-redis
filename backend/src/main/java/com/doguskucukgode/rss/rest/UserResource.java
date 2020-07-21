@@ -1,11 +1,11 @@
-package com.doguskucukgode.rsm.rest;
+package com.doguskucukgode.rss.rest;
 
 import java.util.List;
 
 import javax.ws.rs.core.MediaType;
 
-import com.doguskucukgode.rsm.model.User;
-import com.doguskucukgode.rsm.service.UserService;
+import com.doguskucukgode.rss.model.User;
+import com.doguskucukgode.rss.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

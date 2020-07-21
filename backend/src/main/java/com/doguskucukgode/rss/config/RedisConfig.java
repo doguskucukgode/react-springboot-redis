@@ -1,6 +1,6 @@
-package com.doguskucukgode.rsm.config;
+package com.doguskucukgode.rss.config;
 
-import com.doguskucukgode.rsm.model.User;
+import com.doguskucukgode.rss.model.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

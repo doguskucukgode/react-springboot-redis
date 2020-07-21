@@ -1,4 +1,4 @@
-package com.doguskucukgode.rsm.model;
+package com.doguskucukgode.rss.model;
 
 import lombok.Data;
 
