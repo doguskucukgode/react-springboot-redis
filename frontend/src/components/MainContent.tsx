@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
+import UserTable from './UserTable';
 
 const useStyles = makeStyles(theme => ({
   toolbar: theme.mixins.toolbar,
@@ -29,11 +30,7 @@ function MainContent() {
         <Typography variant='h6'>Title</Typography>
       </div>
       <div className={classes.content}>
-        <Typography paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc maximus,
-          nulla ut commodo sagittis, sapien dui mattis dui, non pulvinar lorem
-          felis nec erat
-        </Typography>
+        <UserTable />
       </div>
     </main>
   );
