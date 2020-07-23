@@ -1,8 +1,8 @@
-import React from 'react';
+import { Typography, Card, CardContent } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid } from '@material-ui/core';
-import { Typography } from '@material-ui/core';
-import UserTable from './UserTable';
+import React from 'react';
+import CupCakeTable from './table/CupCakeTable';
+import UserTable from './table/UserTable';
 
 const useStyles = makeStyles(theme => ({
   toolbar: theme.mixins.toolbar,
@@ -30,9 +30,11 @@ function MainContent() {
         <Typography variant='h6'>Title</Typography>
       </div>
       <div className={classes.content}>
+        <CupCakeTable />
+        <br/>
         <UserTable />
       </div>
-    </main>
+    </main >
   );
 }
 

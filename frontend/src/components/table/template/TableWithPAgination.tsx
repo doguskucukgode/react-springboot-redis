@@ -15,6 +15,10 @@ import FirstPageIcon from '@material-ui/icons/FirstPage';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
+import { TablePaginationActionsProps, TableTemplateInterface } from './TableHelper';
+import TableRowTemplate from './TableRowTemplate';
+
+
 
 const useStyles1 = makeStyles((theme) => ({
     root: {
@@ -23,12 +27,6 @@ const useStyles1 = makeStyles((theme) => ({
     },
 }));
 
-interface TablePaginationActionsProps {
-    count: number;
-    page: number;
-    rowsPerPage: number;
-    onChangePage: (event: React.MouseEvent<HTMLButtonElement>, newPage: number) => void;
-}
 
 function TablePaginationActions(props: TablePaginationActionsProps) {
     const classes = useStyles1();
@@ -91,33 +89,17 @@ TablePaginationActions.propTypes = {
 function createData(name: string, calories: number, fat: number) {
     return { name, calories, fat };
 }
-
-const rows = [
-    createData('Cupcake', 305, 3.7),
-    createData('Donut', 452, 25.0),
-    createData('Eclair', 262, 16.0),
-    createData('Frozen yoghurt', 159, 6.0),
-    createData('Gingerbread', 356, 16.0),
-    createData('Honeycomb', 408, 3.2),
-    createData('Ice cream sandwich', 237, 9.0),
-    createData('Jelly Bean', 375, 0.0),
-    createData('KitKat', 518, 26.0),
-    createData('Lollipop', 392, 0.2),
-    createData('Marshmallow', 318, 0),
-    createData('Nougat', 360, 19.0),
-    createData('Oreo', 437, 18.0),
-].sort((a, b) => (a.calories < b.calories ? -1 : 1));
-
 const useStyles2 = makeStyles({
     table: {
         minWidth: 500,
     },
 });
 
-export default function UserTable() {
+export default function TableWithPagination(props: TableTemplateInterface) {
     const classes = useStyles2();
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
+    const {rows, headerColumns} = props;
 
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
@@ -137,9 +119,8 @@ export default function UserTable() {
             <Table className={classes.table} aria-label="custom pagination table">
                 <TableHead>
                     <TableRow>
-                        <TableCell align="left">Name</TableCell>
-                        <TableCell align="right">Calories&nbsp;(g)</TableCell>
-                        <TableCell align="right">Fat&nbsp;(g)</TableCell>
+                        {headerColumns.sort((a, b) => (a.index < b.index ? -1 : 1))
+                        .map((head) => (<TableCell align="left">{head.value}</TableCell>))}
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -147,17 +128,7 @@ export default function UserTable() {
                         ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                         : rows
                     ).map((row) => (
-                        <TableRow key={row.name}>
-                            <TableCell component="th" scope="row">
-                                {row.name}
-                            </TableCell>
-                            <TableCell style={{ width: 160 }} align="right">
-                                {row.calories}
-                            </TableCell>
-                            <TableCell style={{ width: 160 }} align="right">
-                                {row.fat}
-                            </TableCell>
-                        </TableRow>
+                        <TableRowTemplate {...row} />
                     ))}
 
                     {emptyRows > 0 && (
@@ -170,7 +141,7 @@ export default function UserTable() {
                     <TableRow>
                         <TablePagination
                             rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-                            colSpan={3}
+                            colSpan={headerColumns.length}
                             count={rows.length}
                             rowsPerPage={rowsPerPage}
                             page={page}
