@@ -1,9 +1,9 @@
-import { RowIndexValue, RowTemplateValue } from "./TableHelper";
+import { RowTemplateValue } from "./TableHelper";
 import React from "react";
 import { TableRow, TableCell } from "@material-ui/core";
 
 export default function TableRowTemplate(props: RowTemplateValue) {
-    const { columns, rowIndexSize } = props;
+    const { columns } = props;
     return (
         <TableRow>
             {columns.sort((a, b) => (a.index < b.index ? -1 : 1))

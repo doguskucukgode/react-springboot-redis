@@ -86,9 +86,6 @@ TablePaginationActions.propTypes = {
     rowsPerPage: PropTypes.number.isRequired,
 };
 
-function createData(name: string, calories: number, fat: number) {
-    return { name, calories, fat };
-}
 const useStyles2 = makeStyles({
     table: {
         minWidth: 500,
