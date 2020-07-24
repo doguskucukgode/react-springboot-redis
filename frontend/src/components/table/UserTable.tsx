@@ -1,13 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { RowIndexValue, RowTemplateValue, TableTemplateInterface } from './template/TableHelper';
 import TableWithPagination from './template/TableWithPAgination';
-
-interface User {
-    name: string,
-    surname: string,
-    age: number,
-    gender: string
-}
+import DefaultConstants from '../../config/Constants';
+import User from '../model/User';
 
 const header = [{ index: 0, value: 'Name' as unknown as object } as RowIndexValue,
 { index: 1, value: 'Surname' as unknown as object } as RowIndexValue,
@@ -18,21 +13,7 @@ function createData(name: string, surname: string, age: number, gender: string) 
     return { name: name, surname: surname, age: age, gender: gender } as User;
 }
 
-const rows = [
-    createData('Dogus', 'Kucukgode', 30, 'M'),
-    createData('Dogus1', 'Kucukgode1', 30, 'M'),
-    createData('Dogus2', 'Kucukgode2', 31, 'M'),
-    createData('Dogus3', 'Kucukgode3', 32, 'M'),
-    createData('Dogus4', 'Kucukgode4', 33, 'M'),
-    createData('Dogus5', 'Kucukgode5', 34, 'M'),
-    createData('Dogus6', 'Kucukgode6', 35, 'M'),
-    createData('Dogus7', 'Kucukgode7', 36, 'M'),
-    createData('Dogus8', 'Kucukgode8', 37, 'M'),
-    createData('Dogus9', 'Kucukgode9', 38, 'M'),
-].sort((a, b) => (a.age < b.age ? -1 : 1));
-
-
-function convertCupCake(user: User) {
+function convert(user: User) {
     return {columns: [
         { index: 0, value: user.name as unknown as object } as RowIndexValue,
         { index: 1, value: user.surname as unknown as object } as RowIndexValue,
@@ -41,12 +22,24 @@ function convertCupCake(user: User) {
     ], rowIndexSize:4 } as RowTemplateValue;
 }
 
-export default function UserTable() {
+export default class UserTable extends Component {
+    state = {value: {rows: [], headerColumns: []} as TableTemplateInterface};
 
-    const value = { headerColumns: header, 
-        rows: rows.map((row) => (convertCupCake(row))) } as TableTemplateInterface;
+    componentDidMount() {
+        fetch(DefaultConstants.GET_USER_LIST)
+          .then(results => results.json())
+          .then(data => {
+              console.log(data);
+             const users = { headerColumns: header, 
+                rows: (data as User[]).map((row) => (convert(row))) } as TableTemplateInterface;
+            this.setState({ value: users });
+          }).catch(err => console.log(err))
+      }
 
-    return (
-        <TableWithPagination {...value} />
-    );
+    render() {
+        return (
+            <TableWithPagination {...this.state.value} />
+        );
+    }
+    
 }

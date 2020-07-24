@@ -1,9 +1,6 @@
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
-import CupCakeTable from './table/CupCakeTable';
-import UserTable from './table/UserTable';
-import UserForm from './forms/UserForm';
 
 
 const useStyles = makeStyles(theme => ({
@@ -23,24 +20,19 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function MainContent() {
+function HomeContent() {
   const classes = useStyles();
 
   return (
     <main className={classes.fullWidth}>
       <div className={classes.toolbar} />
       <div className={classes.title}>
-        <Typography variant='h6'>Users</Typography>
+        <Typography variant='h6'>Home</Typography>
       </div>
       <div className={classes.content}>
-        {/* <CupCakeTable /> 
-        <br/>*/}
-        <UserForm/>
-        <br></br>
-        <UserTable />
       </div>
     </main >
   );
 }
 
-export default MainContent;
+export default HomeContent;
