@@ -1,0 +1,16 @@
+.logo {
+  height: 32px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px;
+}
+
+.site-layout-sub-header-background {
+  background: #fff;
+}
+
+.site-layout-background {
+  background: #fff;
+}
+  [data-theme="dark"] .site-layout-sub-header-background {
+    background: #141414;
+  }
