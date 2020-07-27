@@ -96,7 +96,7 @@ export default function TableWithPagination(props: TableTemplateInterface) {
     const classes = useStyles2();
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
-    const {rows, headerColumns} = props;
+    const { rows, headerColumns } = props;
 
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
@@ -115,27 +115,27 @@ export default function TableWithPagination(props: TableTemplateInterface) {
         <TableContainer component={Paper}>
             <Table className={classes.table} aria-label="custom pagination table">
                 <TableHead>
-                    <TableRow>
+                    <TableRow key="tableHead">
                         {headerColumns.sort((a, b) => (a.index < b.index ? -1 : 1))
-                        .map((head) => (<TableCell align="left">{head.value}</TableCell>))}
+                            .map((head, i: number) => (<TableCell key={i} align="left">{head.value}</TableCell>))}
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     {(rowsPerPage > 0
                         ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                         : rows
-                    ).map((row) => (
-                        <TableRowTemplate {...row} />
+                    ).map((row, i) => (
+                        <TableRowTemplate key={i} {...row} />
                     ))}
 
                     {emptyRows > 0 && (
-                        <TableRow style={{ height: 53 * emptyRows }}>
+                        <TableRow key="emptyRows" style={{ height: 53 * emptyRows }}>
                             <TableCell colSpan={6} />
                         </TableRow>
                     )}
                 </TableBody>
                 <TableFooter>
-                    <TableRow>
+                    <TableRow key="paginationRow">
                         <TablePagination
                             rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
                             colSpan={headerColumns.length}

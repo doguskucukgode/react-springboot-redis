@@ -13,6 +13,7 @@ export interface RowIndexValue {
 }
 
 export interface RowTemplateValue {
+    rowKey: string,
     columns: RowIndexValue[],
     rowIndexSize: number
 }

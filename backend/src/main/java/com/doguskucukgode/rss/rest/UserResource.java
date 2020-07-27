@@ -26,12 +26,14 @@ public class UserResource {
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
+    @CrossOrigin
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON)
     public ResponseEntity<User> getUsers(@PathVariable("id") final String userId) {
         final User user = userService.findById(userId);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
+    @CrossOrigin
     @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON)
     public ResponseEntity<Void> createUser(@RequestBody final User user) {
         userService.save(user);
@@ -45,6 +47,7 @@ public class UserResource {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    @CrossOrigin
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable("id") final String userId) {
         userService.delete(userId);
