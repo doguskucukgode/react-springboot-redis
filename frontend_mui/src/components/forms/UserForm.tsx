@@ -1,11 +1,11 @@
-import { FormControl, InputLabel, Select, MenuItem, Card, Typography, Button, FormLabel, RadioGroup, FormControlLabel, Radio, Grid } from '@material-ui/core';
+import { Button, Card, FormControl, FormControlLabel, FormLabel, Grid, Radio, RadioGroup } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import React, { Dispatch } from 'react';
-import User from '../model/User';
-import { addUser } from '../api/UserApi';
-import { Provider, useSelector, useDispatch } from "react-redux";
+import React from 'react';
+import { useDispatch } from "react-redux";
 import { addUserState } from '../../store/actions/UserActions';
+import { addUser } from '../api/UserApi';
+import User from '../model/User';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -55,6 +55,11 @@ export default function UserForm() {
     const dispatch = useDispatch();
 
     const handleSubmit = () => {
+        const res = addUser(user)
+            .catch(e => { console.error(e); return null });
+        if (!res) {
+            return;
+        }
         dispatch(addUserState(user));
         setUser({ name: '', surname: '', gender: 'female', age: 0} as User);
     };

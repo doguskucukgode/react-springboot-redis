@@ -9,6 +9,8 @@ export function userReducer(state: User[] = [], action: UserActions) {
             return state.filter(person => person.id !== action.payload);
         case "SetUsers":
             return action.payload;
+        case "FetchUsers":
+            return [];
         default:
             neverReached(action);
     }
