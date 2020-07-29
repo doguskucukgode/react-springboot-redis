@@ -1,9 +1,8 @@
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
-import CupCakeTable from './table/CupCakeTable';
-import UserTable from './table/UserTable';
 import UserForm from './forms/UserForm';
+import UserTable from './table/UserTable';
 
 
 const useStyles = makeStyles(theme => ({

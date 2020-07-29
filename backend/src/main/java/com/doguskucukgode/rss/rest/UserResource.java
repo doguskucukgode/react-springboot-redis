@@ -40,6 +40,7 @@ public class UserResource {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    @CrossOrigin
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON)
     public ResponseEntity<Void> updateUser(@PathVariable("id") final String userId, @RequestBody final User user) {
         user.setId(userId);

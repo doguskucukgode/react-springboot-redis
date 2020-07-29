@@ -1,11 +1,8 @@
-import React, { useEffect } from 'react';
-import { useSelector } from "react-redux";
-import AppState from '../model/AppState';
-import User from '../model/User';
+import React, { Component } from 'react';
 import { RowIndexValue, RowTemplateValue, TableTemplateInterface } from './template/TableHelper';
 import TableWithPagination from './template/TableWithPAgination';
-
-
+import User from '../model/User';
+import { getUsers } from '../api/UserApi';
 
 const header = [{ index: 0, value: 'Name' as unknown as object } as RowIndexValue,
 { index: 1, value: 'Surname' as unknown as object } as RowIndexValue,
@@ -21,14 +18,20 @@ function convert(user: User) {
     ], rowIndexSize:4, rowKey: user.id} as RowTemplateValue;
 }
 
+export default class UserTableDB extends Component {
+    state = {value: {rows: [], headerColumns: []} as TableTemplateInterface};
 
-export default function UserTable(props: any) {
+    async componentDidMount() {
+        const res  = await getUsers().catch(e => {console.error(e); return null}); 
+        const users = { headerColumns: header, 
+            rows: (res as User[]).map((row) => (convert(row))) } as TableTemplateInterface;
+        this.setState({ value: users });
+      }
 
-    const value = { headerColumns: header, 
-        rows: (useSelector((state: AppState) => state.users)).map((row) => (convert(row))) } as TableTemplateInterface;
-
-    return (
-        <TableWithPagination {...value} />
-    );
+    render() {
+        return (
+            <TableWithPagination {...this.state.value} />
+        );
+    }
+    
 }
-

@@ -1,9 +1,12 @@
 import { FormControl, InputLabel, Select, MenuItem, Card, Typography, Button, FormLabel, RadioGroup, FormControlLabel, Radio, Grid } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import React from 'react';
+import React, { Dispatch } from 'react';
 import User from '../model/User';
 import { addUser } from '../api/UserApi';
+import { Provider, useSelector, useDispatch } from "react-redux";
+import { addUserState } from '../../store/actions/UserActions';
+
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -32,7 +35,6 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-
 const addUserAction = async (user: User) => {
     const res = await addUser({
         id: '',
@@ -49,36 +51,40 @@ const addUserAction = async (user: User) => {
 
 export default function UserForm() {
     const classes = useStyles();
-    const user = {} as User;
+    const [user, setUser] = React.useState({ name: '', surname: '', gender: 'female', age: 0} as User);
+    const dispatch = useDispatch();
 
-    const handleGenderChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-        user.gender = event.target.value as string;
+    const handleSubmit = () => {
+        dispatch(addUserState(user));
+        setUser({ name: '', surname: '', gender: 'female', age: 0} as User);
     };
 
 
     return (
-        <form className={classes.root} noValidate autoComplete="off">
+        <form className={classes.root} autoComplete="off">
             <Card>
                 <Grid container spacing={1}>
                     <Grid item xs={12} >
                         <FormControl variant="outlined" className={classes.formControl}>
                             <TextField
+                                id="outlined-helperText1"
                                 required
-                                id="outlined-helperText"
                                 label="Name"
                                 value={user.name}
                                 helperText="Please enter name"
+                                onChange={(e) => setUser({...user, name: e.target.value})}
                             />
                         </FormControl>
                     </Grid>
                     <Grid item xs={12}>
                         <FormControl variant="outlined" className={classes.formControl}>
                             <TextField
+                                id="outlined-helperText2"
                                 required
-                                id="outlined-helperText"
                                 label="Surname"
                                 value={user.surname}
                                 helperText="Please enter surname"
+                                onChange={(e) => setUser({...user, surname: e.target.value})}
                             />
                         </FormControl>
                     </Grid>
@@ -89,6 +95,7 @@ export default function UserForm() {
                                 label="Age"
                                 type="number"
                                 value={user.age}
+                                onChange={(e) => setUser({...user, age: e.target.value as unknown as number})}
                                 InputLabelProps={{
                                     shrink: true,
                                 }}
@@ -98,7 +105,7 @@ export default function UserForm() {
                     <Grid item xs={12}>
                         <FormControl variant="outlined" className={classes.radioControl}>
                             <FormLabel component="legend">Gender</FormLabel>
-                            <RadioGroup aria-label="gender" name="gender1" value={user.gender} onChange={handleGenderChange}>
+                            <RadioGroup aria-label="gender" name="gender1" value={user.gender} onChange={(e) => setUser({...user, gender: e.target.value})}>
                                 <FormControlLabel value="female" control={<Radio />} label="Female" />
                                 <FormControlLabel value="male" control={<Radio />} label="Male" />
                             </RadioGroup>
@@ -108,7 +115,7 @@ export default function UserForm() {
                         <FormControl variant="outlined" className={classes.formControl}>
                             <Button variant="contained"
                                 color="primary"
-                                onClick={() => addUserAction(user)}
+                                onClick={() => handleSubmit()}
                                 className={classes.buttonControl}>
                                 Save
                             </Button>
