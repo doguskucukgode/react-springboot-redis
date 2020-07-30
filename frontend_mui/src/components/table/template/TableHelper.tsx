@@ -15,10 +15,12 @@ export interface RowIndexValue {
 export interface RowTemplateValue {
     rowKey: string,
     columns: RowIndexValue[],
-    rowIndexSize: number
+    rowIndexSize: number,
+    deleteColumn: boolean
 }
 
 export interface TableTemplateInterface {
     headerColumns: RowIndexValue[],
-    rows: RowTemplateValue[]
+    rows: RowTemplateValue[],
+    deleteColumn: boolean
 }

@@ -23,7 +23,7 @@ function convert(user: User) {
             { index: 1, value: user.surname as unknown as object } as RowIndexValue,
             { index: 2, value: user.age as unknown as object } as RowIndexValue,
             { index: 3, value: user.gender as unknown as object } as RowIndexValue,
-        ], rowIndexSize: 4, rowKey: user.id
+        ], rowIndexSize: 4, rowKey: user.id, deleteColumn: true
     } as RowTemplateValue;
 }
 
@@ -32,7 +32,8 @@ export default function UserTable(props: any) {
 
     const value = {
         headerColumns: header,
-        rows: (useSelector((state: AppState) => state.users)).map((row) => (convert(row)))
+        deleteColumn: true,
+        rows: (useSelector((state: AppState) => state.users)).map((row) => (convert(row))),
     } as TableTemplateInterface;
 
     const dispatch = useDispatch();

@@ -96,7 +96,7 @@ export default function TableWithPagination(props: TableTemplateInterface) {
     const classes = useStyles2();
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
-    const { rows, headerColumns } = props;
+    const { rows, headerColumns, deleteColumn } = props;
 
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
@@ -118,6 +118,10 @@ export default function TableWithPagination(props: TableTemplateInterface) {
                     <TableRow key="tableHead">
                         {headerColumns.sort((a, b) => (a.index < b.index ? -1 : 1))
                             .map((head, i: number) => (<TableCell key={i} align="left">{head.value}</TableCell>))}
+                        {deleteColumn ?
+                            <TableCell width="10%"></TableCell>
+                            : null
+                        }
                     </TableRow>
                 </TableHead>
                 <TableBody>

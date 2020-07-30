@@ -19,7 +19,7 @@ function convert(user: User) {
 }
 
 export default class UserTableDB extends Component {
-    state = {value: {rows: [], headerColumns: []} as TableTemplateInterface};
+    state = {value: {rows: [], headerColumns: [], deleteColumn: true} as TableTemplateInterface};
 
     async componentDidMount() {
         const res  = await getUsers().catch(e => {console.error(e); return null}); 
