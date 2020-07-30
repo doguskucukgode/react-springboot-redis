@@ -3,7 +3,7 @@ import { combineReducers, createStore, Store } from "redux";
 import { getUsers } from '../components/api/UserApi';
 import AppState from '../components/model/AppState';
 import User from '../components/model/User';
-import { userReducer } from './reduceers/UserReducer';
+import { userReducer } from './reducers/UserReducer';
 
 
 const rootReducer = combineReducers<AppState>({
