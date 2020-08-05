@@ -1,15 +1,14 @@
 package com.doguskucukgode.rss.rest;
 
-import java.util.List;
-
-import javax.ws.rs.core.MediaType;
-
 import com.doguskucukgode.rss.model.User;
 import com.doguskucukgode.rss.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.ws.rs.core.MediaType;
+import java.util.List;
 
 
 @RestController
