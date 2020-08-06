@@ -24,6 +24,7 @@ const useStyles = makeStyles(theme => ({
 
 function TopMenu() {
   const classes = useStyles();
+  const [value, setValue] = React.useState(0);
 
   return (
     <AppBar position='fixed' className={classes.appBar}>
@@ -43,7 +44,7 @@ function TopMenu() {
         </MenuItem>
         <MenuItem>
           <Typography variant='h6' className={classes.title}>
-            About
+            Users
           </Typography>
         </MenuItem>
       </Toolbar>

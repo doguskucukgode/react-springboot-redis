@@ -19,7 +19,7 @@ function Home() {
       <TopMenu />
       <SideMenu />
       <MainContent />
-      <Footer />
+      {/*  <Footer /> */}
     </div>
   );
 }

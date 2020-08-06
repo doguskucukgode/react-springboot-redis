@@ -1,9 +1,7 @@
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
-import CupCakeTable from './table/CupCakeTable';
-import UserTable from './table/UserTable';
-import UserTableClass from './table/UserTableClass';
+
 
 const useStyles = makeStyles(theme => ({
   toolbar: theme.mixins.toolbar,
@@ -15,28 +13,26 @@ const useStyles = makeStyles(theme => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
+    backgroundColor: '#f3f3f3'
   },
   fullWidth: {
     width: '100%',
   },
 }));
 
-function MainContent() {
+function HomeContent() {
   const classes = useStyles();
 
   return (
     <main className={classes.fullWidth}>
       <div className={classes.toolbar} />
       <div className={classes.title}>
-        <Typography variant='h6'>Title</Typography>
+        <Typography variant='h6'>Home</Typography>
       </div>
       <div className={classes.content}>
-        {/* <CupCakeTable /> 
-        <br/>*/}
-        <UserTableClass />
       </div>
     </main >
   );
 }
 
-export default MainContent;
+export default HomeContent;

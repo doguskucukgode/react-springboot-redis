@@ -1,12 +1,7 @@
 import React from 'react';
 import { RowIndexValue, RowTemplateValue, TableTemplateInterface } from './template/TableHelper';
 import TableWithPagination from './template/TableWithPAgination';
-
-interface CupCake {
-    name: string,
-    calories: number,
-    fat: number
-}
+import CupCake from '../model/CupCake';
 
 const header = [{ index: 0, value: 'Name' as unknown as object } as RowIndexValue,
 { index: 1, value: 'Calories' as unknown as object } as RowIndexValue,

@@ -7,6 +7,7 @@ This project is just an example of usage of some Spring-related technologies.
 * Spring boot:
     * spring-boot-starter-data
     * spring-boot-starter-web
+    * spring-boot-starter-data-redis
 
 * Hibernate
 * H2 database
@@ -14,4 +15,4 @@ This project is just an example of usage of some Spring-related technologies.
 ### Requirements
 
 * Java 8
-* Installed JCE unlimited strength jurisdiction policy
+* Redis
