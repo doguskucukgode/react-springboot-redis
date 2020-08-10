@@ -13,6 +13,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class User implements Serializable {
 
+    private static final long serialVersionUID = 5021372331235579938L;
     private String id;
     private String name;
     private String surname;
