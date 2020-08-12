@@ -1,6 +1,8 @@
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import UserForm from './forms/UserForm';
 import UserTable from './table/UserTable';
 
@@ -37,6 +39,7 @@ function MainContent() {
         <UserForm/>
         <br></br>
         <UserTable />
+        <ToastContainer />
       </div>
     </main >
   );

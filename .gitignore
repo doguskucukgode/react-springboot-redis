@@ -3,3 +3,5 @@ backend/.gradle/
 backend/.idea/
 backend/build/
 frontend_mui/yarn.lock
+
+frontend_mui/package-lock.json

@@ -6,6 +6,8 @@ import { useDispatch } from "react-redux";
 import { addUserState } from '../../store/actions/UserActions';
 import { addUser } from '../api/UserApi';
 import User from '../model/User';
+import { toast } from 'react-toastify';
+
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -51,17 +53,18 @@ const addUserAction = async (user: User) => {
 
 export default function UserForm() {
     const classes = useStyles();
-    const [user, setUser] = React.useState({ name: '', surname: '', gender: 'female', age: 0} as User);
+    const [user, setUser] = React.useState({ name: '', surname: '', gender: 'female', age: 0 } as User);
     const dispatch = useDispatch();
 
     const handleSubmit = () => {
-        const res = addUser(user)
-            .catch(e => { console.error(e); return null });
-        if (!res) {
-            return;
-        }
-        dispatch(addUserState(user));
-        setUser({ name: '', surname: '', gender: 'female', age: 0} as User);
+        addUser(user)
+        .then(t => {
+            dispatch(addUserState(user));
+            setUser({ name: '', surname: '', gender: 'female', age: 0 } as User);
+        }).catch(e => {
+            toast.error("Network Error");
+            console.error(e); return null
+        });
     };
 
 
@@ -77,7 +80,7 @@ export default function UserForm() {
                                 label="Name"
                                 value={user.name}
                                 helperText="Please enter name"
-                                onChange={(e) => setUser({...user, name: e.target.value})}
+                                onChange={(e) => setUser({ ...user, name: e.target.value })}
                             />
                         </FormControl>
                     </Grid>
@@ -89,7 +92,7 @@ export default function UserForm() {
                                 label="Surname"
                                 value={user.surname}
                                 helperText="Please enter surname"
-                                onChange={(e) => setUser({...user, surname: e.target.value})}
+                                onChange={(e) => setUser({ ...user, surname: e.target.value })}
                             />
                         </FormControl>
                     </Grid>
@@ -100,7 +103,7 @@ export default function UserForm() {
                                 label="Age"
                                 type="number"
                                 value={user.age}
-                                onChange={(e) => setUser({...user, age: e.target.value as unknown as number})}
+                                onChange={(e) => setUser({ ...user, age: e.target.value as unknown as number })}
                                 InputLabelProps={{
                                     shrink: true,
                                 }}
@@ -110,7 +113,7 @@ export default function UserForm() {
                     <Grid item xs={12}>
                         <FormControl variant="outlined" className={classes.radioControl}>
                             <FormLabel component="legend">Gender</FormLabel>
-                            <RadioGroup aria-label="gender" name="gender1" value={user.gender} onChange={(e) => setUser({...user, gender: e.target.value})}>
+                            <RadioGroup aria-label="gender" name="gender1" value={user.gender} onChange={(e) => setUser({ ...user, gender: e.target.value })}>
                                 <FormControlLabel value="female" control={<Radio />} label="Female" />
                                 <FormControlLabel value="male" control={<Radio />} label="Male" />
                             </RadioGroup>

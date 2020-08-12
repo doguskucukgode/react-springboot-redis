@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 
 export interface TablePaginationActionsProps {
     count: number;
@@ -16,7 +16,8 @@ export interface RowTemplateValue {
     rowKey: string,
     columns: RowIndexValue[],
     rowIndexSize: number,
-    deleteColumn: boolean
+    deleteColumn: boolean,
+    deleteFunc: Function
 }
 
 export interface TableTemplateInterface {
