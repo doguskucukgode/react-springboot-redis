@@ -12,7 +12,7 @@ Basic react app with material UI framework, spring boot backend integrated to re
   docker run -p 6379:6379 --name redis -d redis 
  ```
 
- ## Frontend
+ ## Frontend (For Material UI)
 ```
  cd frontend_mui
  yarn install
