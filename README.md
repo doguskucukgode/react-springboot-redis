@@ -21,9 +21,9 @@ Basic react app with material UI framework, spring boot backend integrated to re
 Frontend will be opened automatically at http://localhost:3000
 ## Backend
 ```
+ cd backend
  gradle build
  gradle bootRun
-
 ```
 Backend will be running on http://localhost:8080 
 
